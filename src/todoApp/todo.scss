@@ -1,0 +1,159 @@
+@import "colors";
+
+body {
+  background: #DDDDDD;
+}
+
+#todoApp {
+  width: 60%;
+  height: 80%;
+  background: #FFFFFF;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, .3);
+  margin: 10% auto;
+  padding: 0;
+}
+
+.header {
+}
+
+/* 各ベンダープレフィックスが取れた標準版！！(http://caniuse.com/#search=placeholder-shown) */
+:placeholder-shown {
+  font-style: italic;
+  opacity: .5;
+}
+
+/* Google Chrome, Safari, Opera 15+, Android, iOS */
+::-webkit-input-placeholder {
+  font-style: italic;
+  opacity: .5;
+}
+
+/* Firefox 18- */
+:-moz-placeholder {
+  font-style: italic;
+  opacity: .5;
+}
+
+/* Firefox 19+ */
+::-moz-placeholder {
+  font-style: italic;
+  opacity: .5;
+}
+
+/* IE 10+ */
+:-ms-input-placeholder {
+  font-style: italic;
+  opacity: .5;
+}
+
+.item {
+  position: relative;
+  .control {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 80px;
+    padding: 23px;
+    vertical-align: top;
+    font-size: 1.4em;
+    text-align: center;
+    color: #EEEEEE;
+  }
+  &.active {
+    .control {
+      .fa {
+      }
+      cursor: pointer;
+      color: #DDDDDD;
+      &:hover {
+        color: darken(#DDDDDD, 10%);
+      }
+    }
+  }
+  &.complete {
+    .control {
+      .fa {
+      }
+      cursor: pointer;
+      color: $green-400;
+      &:hover {
+        color: darken(#DDDDDD, 10%);
+      }
+    }
+  }
+}
+
+.input {
+  display: inline-block;
+  width: calc(100% - 100px);
+  box-sizing: border-box;
+  padding: 20px;
+  input {
+    width: 100%;
+    border: none;
+    font-size: 2em;
+    outline: 0;
+  }
+  p {
+    font-size: 2em;
+    margin: 0;
+    line-height: 1.25em;
+  }
+}
+
+.complete {
+  .input {
+    p {
+      text-decoration: line-through;
+      color: $grey-100;
+    }
+  }
+}
+
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 23px;
+  font-size: 1.4em;
+  color: $red-400;
+}
+
+.info {
+  font-size: 14px;
+  color: #AAA;
+
+  .state {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0 31px 10px;
+
+  }
+
+  .btns {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-left: 10%;
+    .btn {
+      font-size: 12px;
+      box-sizing: border-box;
+      display: inline-block;
+      padding: 2px 16px;
+      margin-left: 12px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        opacity: .9;
+      }
+      &.active {
+        cursor: default;
+        border: 1px solid $orange-A200;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+}
+
