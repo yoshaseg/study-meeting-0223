@@ -17,7 +17,7 @@ gulp.task('serve', function () {
     browserSync({
         host: 'localhost',
         server: {
-            baseDir: 'dist',
+            baseDir: 'dist/todoApp',
             directory: true
         }
     });
