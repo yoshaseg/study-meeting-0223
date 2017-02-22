@@ -9,6 +9,20 @@ var args = minimist(process.argv.slice(2));
 var browserify = require('browserify');
 var babelify = require('babelify');
 
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
+var runSequence = require('run-sequence');
+
+gulp.task('serve', function () {
+    browserSync({
+        host: 'localhost',
+        server: {
+            baseDir: 'dist',
+            directory: true
+        }
+    });
+});
+
 gulp.task('html', function () {
     console.log("Html Task start.");
 
@@ -68,8 +82,14 @@ gulp.task('app', function () {
 
 gulp.task('default', ["app", "html", "scss"]);
 
-gulp.task('watch', function () {
-    gulp.watch('src/**/*.js', ['app']);
-    gulp.watch('src/**/*.html', ['html']);
-    gulp.watch('src/**/*.scss', ['scss']);
+gulp.task('watch', ['serve'], function () {
+    $.watch('src/**/*.js', function () {
+        runSequence('app', reload);
+    });
+    $.watch('src/**/*.html', function () {
+        runSequence('html', reload);
+    });
+    $.watch('src/**/*.scss', function () {
+        runSequence('scss', reload);
+    });
 });
