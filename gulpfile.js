@@ -1,5 +1,5 @@
 var minimist = require('minimist');
-
+var sleep = require('sleep');
 var gulp = require('gulp');
 var gulpLoadPlugins = require('gulp-load-plugins');
 var $ = gulpLoadPlugins();
@@ -80,16 +80,22 @@ gulp.task('app', function () {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ["app", "html", "scss"]);
+gulp.task('default', [/*"app",*/ "html", "scss"]);
 
 gulp.task('watch', ['serve'], function () {
-    $.watch('src/**/*.js', function () {
-        runSequence('app', reload);
+    //$.watch('src/**/*.js', function () {
+    //    runSequence('app', reload);
+    //});
+
+    $.watch(['src/**/*', '!src/todoApp/app/**/*', '!src/todoApp/todo.js'], function () {
+        console.log("bbbbbb");
+        runSequence(['html', /*'app', */'scss'], reload);
     });
-    $.watch('src/**/*.html', function () {
-        runSequence('html', reload);
+    $.watch('dist/todoApp/todo.js', function () {
+        console.log("aaaaa");
+        runSequence(['html'], reload);
     });
-    $.watch('src/**/*.scss', function () {
-        runSequence('scss', reload);
-    });
+    //$.watch('src/**/*.scss', function () {
+    //    runSequence('scss', reload);
+    //});
 });
