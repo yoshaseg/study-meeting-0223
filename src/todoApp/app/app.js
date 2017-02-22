@@ -8,7 +8,6 @@ import Header from './components/Header';
 const App = ()=>(
     <div>
         <Header/>
-
         <div className="body">
             <div className="item complete">
                 <div className="control">
