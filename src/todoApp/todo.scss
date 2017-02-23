@@ -80,6 +80,18 @@ body {
       }
     }
   }
+  .remove {
+    cursor: pointer;
+    display: none;
+  }
+  &:hover {
+    .remove {
+      display: block;
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
 }
 
 .input {
