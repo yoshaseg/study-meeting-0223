@@ -2,44 +2,26 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import {todoShape} from '../Schema';
+import Todo from './Todo';
 
 /**
  *
  */
-const Body = ({todoList})=> {
+const Body = ({todoList, filterState})=> {
 
 
     return (
         <div className="body">
             {
-                todoList.map(item=> {
+                todoList.map((item, index)=> {
                     if (item.status == "deleted")return;
-                    let itemClass = "item";
-                    if (item.status == "done") {
-                        itemClass += " complete";
-                    } else {
-                        itemClass += " active";
+                    if (filterState == "active") {
+                        if (item.status == "done")return;
+                    } else if (filterState == "done") {
+                        if (item.status == "active")return;
                     }
                     return (
-                        <div key={"item_" + item.id} className={itemClass}>
-                            <div className="control">
-                                {
-                                    item.status == "done" ?
-                                        <i className="fa fa-check-circle-o"/> :
-                                        <i className="fa fa-circle-thin"/>
-                                }
-                            </div>
-                            <div className="input">
-                                {
-                                    item.mode == "show" ?
-                                        <p>{item.task}</p> :
-                                        <input type="text" placeholder="タスクを入力してください" value={item.task}/>
-                                }
-                            </div>
-                            <div className="remove">
-                                <i className="fa fa-trash-o"/>
-                            </div>
-                        </div>
+                        <Todo index={index} item={item}/>
                     );
                 })
             }
@@ -54,6 +36,7 @@ Body.propTypes = {
 const mapStateToProps = (state, ownProps)=> {
     return {
         todoList: state.todoList,
+        filterState: state.filterState,
     }
 };
 

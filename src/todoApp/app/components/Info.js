@@ -2,27 +2,41 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import {filterStateShape} from '../Schema';
+import {changeFilterState} from '../actions';
 
 /**
  *
  */
-const Info = ({nbTodo, filterState})=>(
+const Info = ({nbTodo, filterState, changeFilterState})=>(
     <div className="info">
         {
             nbTodo > 0 ?
                 <div className="state">残り{nbTodo}個のタスク</div> : <div className="state">タスクはありません！</div>
         }
         <div className="btns">
-            <div className={filterState == "all" ? "btn active" : "btn"}>全て</div>
-            <div className={filterState == "active" ? "btn active" : "btn"}>未対応</div>
-            <div className={filterState == "done" ? "btn active" : "btn"}>終了済</div>
+            <div className={filterState == "all" ? "btn active" : "btn"}
+                 onMouseDown={filterState != "all" ? ()=> {
+                     changeFilterState("all")
+                 } : null }>全て
+            </div>
+            <div className={filterState == "active" ? "btn active" : "btn"}
+                 onMouseDown={filterState != "active" ? ()=> {
+                     changeFilterState("active")
+                 } : null }>未対応
+            </div>
+            <div className={filterState == "done" ? "btn active" : "btn"}
+                 onMouseDown={filterState != "done" ? ()=> {
+                     changeFilterState("done")
+                 } : null }>終了済
+            </div>
         </div>
     </div>
 );
 
 Info.propTypes = {
     nbTodo: PropTypes.number,
-    filterState: PropTypes.shape(filterStateShape)
+    filterState: filterStateShape,
+    changeFilterState: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps)=> {
@@ -40,7 +54,11 @@ const mapStateToProps = (state, ownProps)=> {
 };
 
 const mapDispatchToProps = (dispatch, pwnProps) => {
-    return {}
+    return {
+        changeFilterState: (mode)=> {
+            dispatch(changeFilterState(mode));
+        }
+    }
 };
 
 const InfoContainer = connect(
