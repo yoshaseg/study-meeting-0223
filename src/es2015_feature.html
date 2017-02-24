@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES2015の特徴</title>
+    <script src="../codemirror/codemirror.js"></script>
+    <link rel="stylesheet" href="../codemirror/codemirror.css">
+    <script src="../codemirror/javascript/javascript.js"></script>
+    <style>
+        .CodeMirror {
+            border: solid;
+            font-size: 2em;
+            height: auto;
+        }
+    </style>
+</head>
+<body style="margin: 10% 10% 500px;">
+
+<h1>ES2015の特徴</h1>
+........................
+
+<h1>let・constキーワードによる変数宣言</h1>
+<h2>関数スコープの他にブロックスコープが可能に</h2>
+<textarea id="feature1">
+let foo = [1, 2, 3];
+{
+    let foo = [4, 5, 6];
+    console.log(foo);
+    // => 4, 5, 6
+}
+console.log(foo);
+// => 1, 2, 3
+</textarea>
+
+<h2>定数</h2>
+<textarea id="feature2">
+const bar = "定数A";
+bar = "test"; <—エラーになる
+{
+    const bar = "定数B";
+    console.log(bar);
+    // => 定数B
+}
+console.log(bar);
+// => 定数A
+</textarea>
+
+<h1>classキーワードによるクラス宣言</h1>
+
+<h2>今までは関数を宣言して「クラスのようなもの」として使っていた。<br>
+    これは変数としても使えてしまうので、グローバル変数を書き換えてしまうリスクがあった。<br>
+    ES2015のclass記法を使った宣言では、Humanはnewキーワードなしでは使用できない。<br>
+</h2>
+
+<textarea id="feature3">
+// これまでのクラスのようなもの
+function Human(name) {
+    this.name = name;
+}
+
+Human.prototype.hello = function () {
+    console.log('私は ' + this.name + ' です。');
+};
+
+// ES2015のclassを使って書き直す
+class Human2 {
+    constructor(name) {
+        this.name = name;
+    }
+
+    hello(param = "は", ...other_params) { // <- ...other_paramsの部分が配列展開
+        return '私' + param + ' ' + this.name + (other_params.length ? " " : "") + other_params.join(" ") + 'です。';
+    }
+}
+
+let human = new Human2("Taro");
+console.log(human.hello());
+// => 私はTaroです。
+console.log(human.hello("が"));
+// => 私がTaroです。
+console.log(human.hello("は", "でしたが今は", "Jiro"));
+// => 私はTaroでしたが今はJiroです。
+</textarea>
+
+<h1>アロー関数（Arrow Functions）</h1>
+<h2>関数の定義方法に「アロー関数」が使えるようになった。<br>
+    functionというキーワードを使わずに=>を使って宣言できる。
+</h2>
+<textarea id="feature4">
+// 従来のfunctionを使った書き方
+var plus = function (x, y) {
+    return x + y;
+};
+
+// アロー関数でfunctionを省く
+let plus2 = (x, y) => {
+    return x + y;
+};
+
+// 単一式の場合はブラケットや括弧、returnを省略できる
+let plus3 = (x, y) => x + y;
+let plus4 = x => x + 2;
+</textarea>
+
+<h1>配列展開と分割代入</h1>
+<textarea id="feature5">
+// 配列展開
+hello(param = "は", ...other_params) { // <- ...other_paramsの部分が配列展開
+    return '私' + param + ' ' + this.name + (other_params.length ? " " : "") + other_params.join(" ") + 'です。';
+}
+
+// 分割代入：一度に複数の変数にそれぞれ値を代入できる
+var [name, age] = ['Jiro', 20];
+</textarea>
+
+<h1>文字列のテンプレートリテラル</h1>
+<textarea id="feature6">
+var name = 'john';
+var country = 'japan';
+
+var str1 = `
+Hello!
+
+My name is ${name}.
+
+I live in ${country}.
+`;
+
+console.log(str1);
+// Hello!
+//
+// My name is john.
+//
+// I live in japan.
+</textarea>
+
+<h1>importとexportによるモジュール構文</h1>
+<textarea id="feature7">
+import moduleA from './module/modA';
+import {modB1, modB2} from './module/modB';
+
+console.log(moduleA());
+// => modA!
+console.log(modB1());
+// => modB1!
+console.log(modB2);
+// => modB2!
+
+
+// =======================================================
+// ./module/modA
+
+export default function () {
+    return "modA!";
+}
+
+// =======================================================
+// ./module/modB
+export const modB1 = function () {
+   return "modB1!"
+};
+
+export const modB2 = "modB2!";
+
+</textarea>
+
+<script>
+    var option = {
+        lineNumbers: true,
+        viewportMargin: Infinity,
+        lineWrapping: true,
+    };
+    CodeMirror.fromTextArea(document.getElementById("feature1"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature2"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature3"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature4"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature5"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature6"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature7"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature8"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature9"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature10"), option);
+
+</script>
+</body>
+</html>
