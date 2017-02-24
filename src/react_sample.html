@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSXの特徴</title>
+    <script src="../codemirror/codemirror.js"></script>
+    <link rel="stylesheet" href="../codemirror/codemirror.css">
+    <script src="../codemirror/jsx/jsx.js"></script>
+    <style>
+        .CodeMirror {
+            border: solid;
+            font-size: 2em;
+            height: auto;
+        }
+    </style>
+</head>
+<body style="margin: 10% 10% 500px;">
+
+<h1>JSXの特徴</h1>
+<h2>jsx=React.jsで使われている、JavaScriptの独自拡張構文。<br>
+    特徴は、JSの中にHTML風のものをそのまま書く記法であること
+</h2>
+<textarea id="feature1">
+var dropdown = (
+  <Dropdown>
+    A dropdown list
+    <Menu>
+      <MenuItem>Do Something</MenuItem>
+      <MenuItem>Do Something Fun!</MenuItem>
+      <MenuItem>Do Something Else</MenuItem>
+    </Menu>
+  </Dropdown>
+);
+render(dropdown);
+
+</textarea>
+
+<script>
+    var option = {
+        lineNumbers: true,
+        viewportMargin: Infinity,
+        lineWrapping: true,
+    };
+    CodeMirror.fromTextArea(document.getElementById("feature1"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature2"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature3"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature4"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature5"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature6"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature7"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature8"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature9"), option);
+    CodeMirror.fromTextArea(document.getElementById("feature10"), option);
+
+</script>
+</body>
+</html>
