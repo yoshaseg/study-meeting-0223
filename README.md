@@ -1,7 +1,12 @@
 # study-meeting-0223
 
+## インストール
+
 $ npm i
+
 $ npm run dev
+
+## 各ブランチの説明
 
 ・masterブランチ（開発前の状態）
 
